@@ -1,7 +1,7 @@
-#	Kollar, Edward ekollar@ford.com	
-#	2016/12/08
+#   Kollar, Edward ekollar@ford.com	
+#   2016/12/08
 
-	$objShell = New-Object -ComObject Shell.Application 
+    $objShell = New-Object -ComObject Shell.Application 
     $objFolder = $objShell.Namespace(0xA)
     $temp = get-ChildItem "env:\TEMP" 
     $temp2 = $temp.Value 
@@ -30,4 +30,4 @@
     Sleep 1
      
     write-Host "Finished the cleanup task!" -ForegroundColor Yellow
-	Sleep 5
+    Sleep 5
