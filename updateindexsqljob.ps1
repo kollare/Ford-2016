@@ -37,13 +37,13 @@
     Default is 1433
     
 .EXAMPLE
-    Update-SQLIndexRunbook -SqlServer "server.database.windows.net" -Database "Finance" -SQLCredentialName "FinanceCredentials"
+    updateindexsqljob -SqlServer "server.database.windows.net" -Database "Finance" -SQLCredentialName "FinanceCredentials"
 
 .EXAMPLE
-    Update-SQLIndexRunbook -SqlServer "server.database.windows.net" -Database "Finance" -SQLCredentialName "FinanceCredentials" -FragPercentage 30
+    updateindexsqljob -SqlServer "server.database.windows.net" -Database "Finance" -SQLCredentialName "FinanceCredentials" -FragPercentage 30
 
 .EXAMPLE
-    Update-SQLIndexRunbook -SqlServer "server.database.windows.net" -Database "Finance" -SQLCredentialName "FinanceCredentials" -Table "Customers" -RebuildOffline $True
+    updateindexsqljob -SqlServer "server.database.windows.net" -Database "Finance" -SQLCredentialName "FinanceCredentials" -Table "Customers" -RebuildOffline $True
 
 .NOTES
     AUTHOR: Kollar, Edward 

@@ -1,3 +1,15 @@
+<#
+.SYNOPSIS 
+    Update the statistics of high-use tables in the sdn.
+
+.DESCRIPTION
+    This runbook updates the statistics of known high-use tables as a temporary "hot-fix" compensating the lack of a cache in current deployment.
+
+.NOTES
+    AUTHOR: Kollar, Edward 
+	USER: ekollar@azureford.onmicrosoft.com
+    LASTEDIT: 2016/12/09
+#>
 workflow updatestatisticssqljob
 {
     param
