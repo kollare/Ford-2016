@@ -15,7 +15,9 @@ Select * from sys.dm_exec_requests where session_id = spid -- We got the spid 
 Select * from sys.dm_exec_sql_text(sql_handle)-  sql_handle we will get by executing above query and the result set will have a sql_handle column which can be used in this query.
  
 /* 3) We can check the fragmentation report of the database. Following query will give us all indexes fragmented above 30%. */
-SELECT OBJECT_NAME(ind.OBJECT_ID) AS TableName, ind.name AS IndexName, indexstats.index_type_desc AS IndexType, indexstats.avg_fragmentation_in_percent FROM sys.dm_db_index_physical_stats(DB_ID(),     NULL, NULL, NULL, NULL) indexstats INNER JOIN sys.indexes ind ON ind.object_id = indexstats.object_id AND ind.index_id = indexstats.index_id WHERE         indexstats.avg_fragmentation_in_percent > 30 ORDER BY indexstats.avg_fragmentation_in_percent DESC
+SELECT OBJECT_NAME(ind.OBJECT_ID) AS TableName, ind.name AS IndexName, indexstats.index_type_desc AS IndexType, indexstats.avg_fragmentation_in_percent FROM sys.dm_db_index_physical_stats(DB_ID(),
+    NULL, NULL, NULL, NULL) indexstats INNER JOIN sys.indexes ind ON ind.object_id = indexstats.object_id AND ind.index_id = indexstats.index_id WHERE
+    indexstats.avg_fragmentation_in_percent > 30 ORDER BY indexstats.avg_fragmentation_in_percent DESC
 
 /* 4) As per MS advise Stats needs to be updated periodically, following query will help us understand when the stats were last updated. */
 SELECT OBJECT_NAME(object_id) AS ObjectName, STATS_DATE(object_id, stats_id) AS StatisticsDate, * FROM sys.stats order by StatisticsDate desc
