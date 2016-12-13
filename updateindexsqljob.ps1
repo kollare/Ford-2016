@@ -8,7 +8,8 @@
     It highlights how to break up calls into smaller chunks, 
     in this case each table in a database, and uses checkpoints. 
     This allows the runbook job to resume for the next chunk of work even if the 
-    fairshare feature of Azure Automation puts the job back into the queue every 30 minutes
+    fairshare feature of Azure Automation puts the job back into the queue every 30 minutes.
+	(Parts of this script utilize open-source code found online)
 
 .PARAMETER SqlServer
     Name of the SqlServer
@@ -40,7 +41,7 @@
 .NOTES
     AUTHOR: Kollar, Edward 
 	USER: ekollar@azureford.onmicrosoft.com
-    LASTEDIT: 2016/12/12
+    LASTEDIT: 2016/12/13
 #>
 workflow updateindexsqljob {
     param(
@@ -54,10 +55,10 @@ workflow updateindexsqljob {
         [string] $SQLCredentialName,
             
         [parameter(Mandatory=$False)]
-        [int] $FragPercentage = 20,
+        [int] $FragPercentage=20,
 
         [parameter(Mandatory=$False)]
-        [int] $SqlServerPort = 1433,
+        [int] $SqlServerPort=1433,
         
         [parameter(Mandatory=$False)]
         [boolean] $RebuildOffline = $False,
@@ -72,9 +73,10 @@ workflow updateindexsqljob {
         throw "Could not retrieve '$SQLCredentialName' credential asset. Check that you created this first in the Automation service."
     }
     
-    $SqlUsername = $SqlCredential.UserName 
-    $SqlPass = $SqlCredential.GetNetworkCredential().Password
+    $SqlUsername = $SqlCredential.UserName
 	# $SqlUsername = "ekollar@azureford.onmicrosoft.com"
+    $SqlPass = $SqlCredential.GetNetworkCredential().Password
+	# SqlPass = "##########"
 	
     $TableNames = Inlinescript {
         # Define the connection to the SQL Database
