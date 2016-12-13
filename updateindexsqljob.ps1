@@ -81,8 +81,7 @@ workflow updateindexsqljob {
     $TableNames = Inlinescript {
         # Define the connection to the SQL Database
         $Conn = New-Object System.Data.SqlClient.SqlConnection(
-			"Server=tcp:$using:SqlServer,$using:SqlServerPort;Database=$using:Database;UserID=$using:SqlUsername;
-			Password=$using:SqlPass;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;")
+		"Server=tcp:$using:SqlServer,$using:SqlServerPort;Database=$using:Database;User ID=$using:SqlUsername;Password=$using:SqlPass;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;")
          
         # Open the SQL connection
         $Conn.Open()
@@ -163,7 +162,8 @@ workflow updateindexsqljob {
         EXEC('ALTER INDEX ALL ON $Using:TableName REBUILD with (ONLINE=ON)')
 "@
         # Define the connection to the SQL Database
-        $Conn = New-Object System.Data.SqlClient.SqlConnection("Server=tcp:$using:SqlServer,$using:SqlServerPort;Database=$using:Database;User ID=$using:SqlUsername;Password=$using:SqlPass;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;")
+        $Conn = New-Object System.Data.SqlClient.SqlConnection(
+		"Server=tcp:$using:SqlServer,$using:SqlServerPort;Database=$using:Database;User ID=$using:SqlUsername;Password=$using:SqlPass;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;")
         # Open the SQL connection
         $Conn.Open()
         # Define the SQL command to run. In this case we are getting the number of rows in the table
