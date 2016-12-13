@@ -10,12 +10,10 @@
 	USER: ekollar@azureford.onmicrosoft.com
     LASTEDIT: 2016/12/09
 #>
-workflow updatestatisticssqljob
-{
-    param
-    (
+workflow updatestatisticssqljob {
+    param(
         # Fully-qualified name of the Azure DB server 
-        [parameter(Mandatory=$true)] 
+        [parameter(Mandatory=$true)]
         [string] $SqlServerName,
 
         # Credentials for $SqlServerName stored as an Azure Automation credential asset
@@ -27,9 +25,7 @@ workflow updatestatisticssqljob
         [string] $SqlPassword
     )
 
-    inlinescript
-    {
-
+    inlinescript {
         # Setup credentials   
         $ServerName = $Using:SqlServerName
         $UserId = $Using:SqlUserId
@@ -62,8 +58,7 @@ workflow updatestatisticssqljob
         $SdnDbResult = $SdnDatabaseCommand.ExecuteNonQuery()
 
         # Proceed if there is at least one database
-        # if ($SdnDbResult.HasRows)
-        # {
+        # if ($SdnDbResult.HasRows) {
             Write-Output "updated statistics"
         # } 
 
