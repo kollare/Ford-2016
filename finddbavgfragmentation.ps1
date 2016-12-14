@@ -57,8 +57,8 @@ workflow finddbavgfragmentation {
         [parameter(Mandatory=$False)]
         [int] $SqlServerPort=1433,
         
-        [parameter(Mandatory=$False)]
-        [boolean] $RebuildOffline = $False,
+        # [parameter(Mandatory=$False)]
+        # [boolean] $RebuildOffline = $False,
 
         [parameter(Mandatory=$False)]
         [string] $Table
@@ -107,17 +107,17 @@ workflow finddbavgfragmentation {
 
         # Return the table names that have high fragmentation
         ForEach ($FragTable in $FragmentedTable.Tables[0]) {
-            Write-Verbose ("Table Object ID:" + $FragTable.Item("object_id"))
-            Write-Verbose ("Fragmentation:" + $FragTable.Item("avg_fragmentation_in_percent"))
-            Write-Output ("Table Object ID:" + $FragTable.Item("object_id"))
-            Write-Output ("Fragmentation:" + $FragTable.Item("avg_fragmentation_in_percent"))
+            ## Write-Output ("Table Object ID:" + $FragTable.Item("object_id"))
+            ## Write-Output ("Fragmentation:" + $FragTable.Item("avg_fragmentation_in_percent"))
+            ## Write-Verbose ("Table Object ID:" + $FragTable.Item("object_id"))
+            ## Write-Verbose ("Fragmentation:" + $FragTable.Item("avg_fragmentation_in_percent"))
             If ($FragTable.avg_fragmentation_in_percent -ge $Using:FragPercentage) {
                 # Table is fragmented. Return this table for indexing by finding its name
                 ForEach($Id in $TableSchema.Tables[0]) {
                     if ($Id.OBJECT_ID -eq $FragTable.object_id.ToString()) {
                         # Found the table name for this table object id. Return it
-                        Write-Verbose ("Found a table to index! : " +  $Id.Item("TableName"))
-                        Write-Output ("Found a table to index! : " +  $Id.Item("TableName"))
+                        ## Write-Output ("Found a table to index! : " +  $Id.Item("TableName"))
+                        ## Write-Verbose ("Found a table to index! : " +  $Id.Item("TableName"))
                         $Id.TableName
                     }
                 }
@@ -125,6 +125,7 @@ workflow finddbavgfragmentation {
         }
         $Conn.Close()
     }
+    Write-Output ($TableNames)
     Write-Output ("Success: Average Fragmentation for all tables in the database: " + $Database + " were found!")
     Write-Verbose ("...finished running 'finddbavgfragmentation' script successfully")
 }
