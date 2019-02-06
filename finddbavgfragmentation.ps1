@@ -29,15 +29,16 @@
     [Default is 1433]
 
 .NOTES
-    AUTHOR: Kollar, Edward 
+      AUTHOR: Kollar, Edward 
 	USER: ekollar@azureford.onmicrosoft.com
     LASTEDIT: 2016/12/14
-	SERVER: h8z9rhbb55
+    REVISION: 2019/02/06
+      SERVER: MASKED
 #>
 workflow finddbavgfragmentation {
     param(
         [parameter(Mandatory=$True)]
-        [string] $SqlServer = "h8z9rhbb55.database.windows.net",
+        [string] $SqlServer = "server",
     
         [parameter(Mandatory=$True)]
         [string] $Database = "sdn",
@@ -46,10 +47,10 @@ workflow finddbavgfragmentation {
         # [string] $SQLCredentialName,
         
 		[parameter(Mandatory=$True)]
-		[string] $SqlUsername = "fordadminna",
+		[string] $SqlUsername = "user",
 		
 		[parameter(Mandatory=$True)]
-		[string] $SqlPass = "G7fhM5y5UfQfw5N",
+		[string] $SqlPass = "pass",
 		
         [parameter(Mandatory=$False)]
         [int] $FragPercentage=25,
